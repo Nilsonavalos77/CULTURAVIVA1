@@ -1,7 +1,7 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import Event
 from .serializers import EventSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
 
 class EventListCreateView(generics.ListCreateAPIView):
     serializer_class = EventSerializer
