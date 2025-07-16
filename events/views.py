@@ -6,18 +6,14 @@ from .serializers import EventSerializer
 class EventListCreateView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    permission_classes = [permissions.AllowAny]  # ✅ acceso libre temporal
 
 # Obtener, actualizar y eliminar un evento específico
 class EventRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]  # ✅ acceso libre temporal
 
     def get_queryset(self):
-        # Solo permite acceso a eventos del usuario autenticado
-        return self.queryset.filter(user=self.request.user)
+        return self.queryset.all()  # ✅ sin filtrar por usuario
 
