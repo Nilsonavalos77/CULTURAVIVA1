@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
+    path('', lambda request: HttpResponse("¡Servidor Django funcionando! Accede a /admin/, /api/users/ o /api/eventos/"), name='home-api'), # <--- Añade esta línea
     path('admin/', admin.site.urls),
-    path('api/users/', include('users.urls')),     # ahora todo lo de usuarios va por /api/users/
-    path('api/eventos/', include('events.urls')),  # y eventos por /api/eventos/
-    path('api/login/', obtain_auth_token),         # login por token
+    path('api/users/', include('users.urls')),
+    path('api/eventos/', include('events.urls')),
 ]
