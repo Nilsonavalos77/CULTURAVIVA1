@@ -1,19 +1,7 @@
-from rest_framework import generics, permissions
-from .models import Event
-from .serializers import EventSerializer
+from rest_framework import generics
+from .models import Event  # Asegurate que el modelo exista
+from .serializers import EventSerializer  # Asegurate que esté creado
 
-# Lista y creación de eventos
-class EventListCreateView(generics.ListCreateAPIView):
+class EventListCreateAPIView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.AllowAny]  # ✅ acceso libre temporal
-
-# Obtener, actualizar y eliminar un evento específico
-class EventRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
-    permission_classes = [permissions.AllowAny]  # ✅ acceso libre temporal
-
-    def get_queryset(self):
-        return self.queryset.all()  # ✅ sin filtrar por usuario
-
