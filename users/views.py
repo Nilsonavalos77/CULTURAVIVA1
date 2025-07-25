@@ -1,21 +1,24 @@
-from rest_framework import generics
-from .serializers import RegisterSerializer
-from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
+# users/views.py
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework import status
+from django.contrib.auth import authenticate, login
+from rest_framework.permissions import AllowAny # Importante para que no necesiten autenticarse para iniciar sesión
 
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
+class UserLoginAPIView(APIView):
+    permission_classes = [AllowAny] # Permite el acceso sin autenticación previa
 
     def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        token = Token.objects.create(user=self.object)
-        return Response({'token': token.key})
+        username = request.data.get('username')
+        password = request.data.get('password')
 
+        user = authenticate(request, username=username, password=password)
 
-class LoginView(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        return Response({'token': response.data['token']})
+        if user is not None:
+            # Opcional: Si usas sesiones de Django junto con DRF
+            # Esto establecerá la cookie de sesión de Django
+            login(request, user)
+            return Response({"message": "Login successful", "user_id": user.id}, status=status.HTTP_200_OK)
+        else:
+            return Response({"detail": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+

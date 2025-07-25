@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')),
     path('api/eventos/', include('events.urls')),
+    path('api/users/login/', obtain_auth_token),
 ]

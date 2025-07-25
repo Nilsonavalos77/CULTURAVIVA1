@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\bnoel\Documents\CV1\CULTURAVIVA1\env"
+VIRTUAL_ENV="C:\Users\bnoel\Documents\basta\CULTURAVIVA1\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
