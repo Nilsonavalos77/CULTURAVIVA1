@@ -10,3 +10,5 @@ urlpatterns = [
     path('api/eventos/', include('events.urls')),
     path('api/users/login/', obtain_auth_token),
 ]
+
+
