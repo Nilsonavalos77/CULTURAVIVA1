@@ -7,5 +7,9 @@ from .serializers import EventSerializer
 class EventListCreateAPIView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    # Para que cualquiera pueda ver (GET), pero solo autenticados puedan crear (POST)
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # o la que uses
+
+class EventRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [permissions.IsAdminUser]  # o la que uses para editar/borrar
