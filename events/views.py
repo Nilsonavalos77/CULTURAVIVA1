@@ -8,8 +8,4 @@ class EventListCreateAPIView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     # Para que cualquiera pueda ver (GET), pero solo autenticados puedan crear (POST)
-    permission_classes = [permissions.IsAdminUser]
-
-
-    # Si quieres que CUALQUIERA pueda VER Y CREAR (menos recomendado para POST)
-    # permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny]
