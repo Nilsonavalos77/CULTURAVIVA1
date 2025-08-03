@@ -12,4 +12,4 @@ class EventListCreateAPIView(generics.ListCreateAPIView):
 class EventRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.IsAdminUser]  # o la que uses para editar/borrar
+    permission_classes = [permissions.IsAdminUser]  
