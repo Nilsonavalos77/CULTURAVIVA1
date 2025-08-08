@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 from rest_framework.authtoken.views import obtain_auth_token
-# Importa el módulo de settings para poder usarlo en la condición de DEBUG
 from django.conf import settings
 from django.conf.urls.static import static
 

@@ -1,6 +1,5 @@
-# events/views.py
 from rest_framework import generics
-from rest_framework import permissions # <--- ¡Importa permissions!
+from rest_framework import permissions 
 from .models import Event
 from .serializers import EventSerializer
 
